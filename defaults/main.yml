@@ -1,0 +1,5 @@
+---
+# defaults file for openresty
+openresty_ver : '1.9.3.2'
+
+openresty_mirror : 'https://openresty.org/download'

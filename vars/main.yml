@@ -1,0 +1,4 @@
+---
+# vars file for openresty
+openresty_name : 'ngx_openresty-{{openresty_ver}}'
+openresty_tgz : '{{openresty_name}}.tar.gz'

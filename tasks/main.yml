@@ -1,0 +1,27 @@
+---
+# tasks file for openresty
+- name: download tgz...
+  get_url: url='{{openresty_mirror}}/{{openresty_tgz}}' dest='/tmp/{{openresty_tgz}}'
+
+- name: unarchive...
+  unarchive: >
+    copy=no
+    src=/tmp/{{openresty_tgz}}
+    dest='/opt'
+
+- name: configure...
+  command: ./configure
+  args:
+    chdir: '/opt/{{openresty_name}}'
+    creates: '/opt/{{openresty_name}}/Makefile'
+
+- name: make...
+  command: make
+  args:
+    chdir: '/opt/{{openresty_name}}'
+
+- name: install...
+  command: make install
+  args:
+    chdir: '/opt/{{openresty_name}}'
+    creates: '/usr/local/openresty/nginx/sbin/nginx'
