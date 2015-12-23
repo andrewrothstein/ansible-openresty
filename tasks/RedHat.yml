@@ -1,0 +1,12 @@
+---
+- name: (RedHat) deps...
+  yum: name={{item}} state=latest
+  with_items:
+    - wget
+    - perl
+    - readline-devel
+    - pcre-devel
+    - openssl-devel
+    - gcc
+    - make
+    

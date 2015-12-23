@@ -1,0 +1,12 @@
+---
+- name: (Debian) deps...
+  apt: name={{item}} state=latest
+  with_items:
+    - wget
+    - libreadline-dev
+    - libncurses5-dev
+    - libpcre3-dev
+    - libssl-dev
+    - perl
+    - make
+    - build-essential

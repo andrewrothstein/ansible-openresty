@@ -3,3 +3,5 @@
 openresty_ver : '1.9.3.2'
 
 openresty_mirror : 'https://openresty.org/download'
+
+openresty_install_dir : '/usr/local/openresty'

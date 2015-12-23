@@ -1,5 +1,12 @@
 ---
-# tasks file for openresty
+- name: (RedHat) deps...
+  when: ansible_os_family == "RedHat"
+  include: RedHat.yml
+
+- name: (Debian) deps...
+  when: ansible_os_family == "Debian"
+  include: Debian.yml
+  
 - name: download tgz...
   get_url: url='{{openresty_mirror}}/{{openresty_tgz}}' dest='/tmp/{{openresty_tgz}}'
 
@@ -10,13 +17,17 @@
     dest='/opt'
 
 - name: configure...
-  command: ./configure
+  command: >
+    ./configure
+    --prefix {{openresty_install_dir}}
+    --with-pcre-jit
+    --with-ipv6
   args:
     chdir: '/opt/{{openresty_name}}'
     creates: '/opt/{{openresty_name}}/Makefile'
 
 - name: make...
-  command: make
+  command: make build
   args:
     chdir: '/opt/{{openresty_name}}'
 
@@ -24,4 +35,4 @@
   command: make install
   args:
     chdir: '/opt/{{openresty_name}}'
-    creates: '/usr/local/openresty/nginx/sbin/nginx'
+    creates: '{{openresty_install_dir}}/nginx/sbin/nginx'
