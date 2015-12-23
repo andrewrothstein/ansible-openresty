@@ -8,7 +8,7 @@ proxy = "{{proxy_env.http_proxy}}"
 {% endif %}
 
 {% if luarocks_servers is defined %}
-rocks_servers = { { {% for rs in luarocks_servers %}"{{rs}}"{% if not loop.last %},{% endif %}{% endif %} } }
+rocks_servers = { { {% for rs in luarocks_servers %}"{{rs}}"{% if not loop.last %},{% endif %}{% endfor %} } }
 {% endif %}
 
 
