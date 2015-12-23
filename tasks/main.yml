@@ -75,10 +75,17 @@
     chdir: /opt/{{luarocks_name}}
 
 - name: proxify luarocks...
-  when: proxy.http_proxy is defined
+  when: proxy_env.http_proxy is defined
   template: >-
     src=config-5.1.lua.j2
     dest={{luarocks_dir}}/config-5.1.lua
     owner=root
     group=root
     mode=0644
+
+- name: install some rocks..
+  command: >
+    {{luajit_dir}}/bin/luarocks install {{item}}
+  with_items:
+    - luasec
+    - luajson

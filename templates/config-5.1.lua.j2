@@ -3,10 +3,12 @@ rocks_trees = {
    { name = [[system]], root = [[{{luajit_dir}}]] }
 }
 
-{% if proxy.http_proxy is defined %}
-proxy = {{proxy.http_proxy}}
-{% endif }
+{% if proxy_env.http_proxy is defined %}
+proxy = "{{proxy_env.http_proxy}}"
+{% endif %}
 
 {% if luarocks_servers is defined %}
 rocks_servers = { { {% for rs in luarocks_servers %}"{{rs}}"{% if not loop.last %},{% endif %}{% endif %} } }
 {% endif %}
+
+
