@@ -9,3 +9,11 @@ luajit_suffix : 'jit-2.1.0-beta1'
 
 luarocks_ver : '2.2.2'
 luarocks_mirror : 'http://luarocks.org/releases'
+
+# if you want to use custom luarocks_servers
+#luarocks_servers :
+#  - https://luarocks.org
+#  - https://raw.githubusercontent.com/rocks-moonscript-org/moonrocks-mirror/master/
+#  - http://luafr.org/moonrocks/
+#  - http://luarocks.logiceditor.com/rocks
+

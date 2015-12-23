@@ -6,3 +6,7 @@ rocks_trees = {
 {% if proxy.http_proxy is defined %}
 proxy = {{proxy.http_proxy}}
 {% endif }
+
+{% if luarocks_servers is defined %}
+rocks_servers = { { {% for rs in luarocks_servers %}"{{rs}}"{% if not loop.last %},{% endif %}{% endif %} } }
+{% endif %}
