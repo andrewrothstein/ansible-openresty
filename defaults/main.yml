@@ -17,3 +17,7 @@ luarocks_mirror : 'http://luarocks.org/releases'
 #  - http://luafr.org/moonrocks/
 #  - http://luarocks.logiceditor.com/rocks
 
+# if you want to control the set of luarocks to install
+#luarocks_install :
+#  - luasec
+#  - luajson

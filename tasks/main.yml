@@ -84,8 +84,7 @@
     mode=0644
 
 - name: install some rocks..
+  when: luarocks_install is defined
   command: >
     {{luajit_dir}}/bin/luarocks install {{item}}
-  with_items:
-    - luasec
-    - luajson
+  with_items: luarocks_install
