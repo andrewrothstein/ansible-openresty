@@ -1,0 +1,8 @@
+rocks_trees = {
+   { name = [[user]], root = home..[[/.luarocks]] },
+   { name = [[system]], root = [[{{luajit_dir}}]] }
+}
+
+{% if proxy.http_proxy is defined %}
+proxy = {{proxy.http_proxy}}
+{% endif }

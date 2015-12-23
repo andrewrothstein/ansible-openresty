@@ -2,3 +2,11 @@
 # vars file for openresty
 openresty_name : 'ngx_openresty-{{openresty_ver}}'
 openresty_tgz : '{{openresty_name}}.tar.gz'
+
+luajit_dir : '{{openresty_install_dir}}/luajit'
+luajit_include_dir : '{{luajit_dir}}/include/luajit-{{luajit_ver}}'
+
+luarocks_name : 'luarocks-{{luarocks_ver}}'
+luarocks_tgz : '{{luarocks_name}}.tar.gz'
+luarocks_tgz_url : '{{luarocks_mirror}}/{{luarocks_tgz}}'
+luarocks_dir : '{{luajit_dir}}/luarocks'

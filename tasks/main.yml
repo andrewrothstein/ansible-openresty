@@ -8,7 +8,9 @@
   include: Debian.yml
   
 - name: download tgz...
-  get_url: url='{{openresty_mirror}}/{{openresty_tgz}}' dest='/tmp/{{openresty_tgz}}'
+  get_url: >
+    url='{{openresty_mirror}}/{{openresty_tgz}}'
+    dest='/tmp/{{openresty_tgz}}'
 
 - name: unarchive...
   unarchive: >
@@ -19,7 +21,7 @@
 - name: configure...
   command: >
     ./configure
-    --prefix {{openresty_install_dir}}
+    --prefix={{openresty_install_dir}}
     --with-pcre-jit
     --with-ipv6
   args:
@@ -36,3 +38,47 @@
   args:
     chdir: '/opt/{{openresty_name}}'
     creates: '{{openresty_install_dir}}/nginx/sbin/nginx'
+
+- name: link luajit as lua...
+  file: >-
+    src={{openresty_install_dir}}/luajit/bin/luajit-2.1.0-beta1
+    dest={{openresty_install_dir}}/luajit/bin/lua
+    state=link
+    
+- name: downloading luarocks...
+  get_url: >-
+    url='{{luarocks_tgz_url}}'
+    dest=/tmp/{{luarocks_tgz}}
+
+- name: unarchive luarocks...
+  unarchive: copy=no src=/tmp/{{luarocks_tgz}} dest=/opt
+
+- name: configure luarocks...
+  command: >
+    ./configure
+    --prefix={{luajit_dir}}
+    --sysconfdir={{luarocks_dir}}
+    --with-lua={{luajit_dir}}
+    --lua-suffix={{luajit_suffix}}
+    --with-lua-include={{luajit_include_dir}}
+  args:
+    chdir: /opt/{{luarocks_name}}
+
+- name: build luarocks...
+  command: make build
+  args:
+    chdir: /opt/{{luarocks_name}}
+
+- name: install luarocks...
+  command: make install
+  args:
+    chdir: /opt/{{luarocks_name}}
+
+- name: proxify luarocks...
+  when: proxy.http_proxy is defined
+  template: >-
+    src=config-5.1.lua.j2
+    dest={{luarocks_dir}}/config-5.1.lua
+    owner=root
+    group=root
+    mode=0644
