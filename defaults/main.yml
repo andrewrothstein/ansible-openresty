@@ -19,3 +19,4 @@ luarocks_build_dir : '/opt/luarocks'
 luarocks_install :
   - luasec
   - luajson
+  - lua-resty-http
