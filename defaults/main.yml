@@ -5,6 +5,8 @@ openresty_mirror : 'https://openresty.org/download'
 openresty_build_dir : '/opt/openresty'
 openresty_install_dir : '/usr/local/openresty'
 
+openresty_timeout_seconds : 600
+
 openresty_cleanup : False
 
 nginx_auth_ldap_ver : master
