@@ -1,23 +1,21 @@
 ---
 # defaults file for openresty
-openresty_ver : '1.9.3.2'
+openresty_ver : '1.9.7.4'
 openresty_mirror : 'https://openresty.org/download'
+openresty_build_dir : '/opt/openresty'
 openresty_install_dir : '/usr/local/openresty'
 
+openresty_cleanup : False
+
+nginx_auth_ldap_ver : master
+
 luajit_ver : '2.1'
-luajit_suffix : 'jit-2.1.0-beta1'
 
-luarocks_ver : '2.2.2'
+luarocks_ver : '2.3.0'
 luarocks_mirror : 'http://luarocks.org/releases'
-
-# if you want to use custom luarocks_servers
-#luarocks_servers :
-#  - https://luarocks.org
-#  - https://raw.githubusercontent.com/rocks-moonscript-org/moonrocks-mirror/master/
-#  - http://luafr.org/moonrocks/
-#  - http://luarocks.logiceditor.com/rocks
+luarocks_build_dir : '/opt/luarocks'
 
 # if you want to control the set of luarocks to install
-#luarocks_install :
-#  - luasec
-#  - luajson
+luarocks_install :
+  - luasec
+  - luajson

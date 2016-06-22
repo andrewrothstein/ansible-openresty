@@ -11,80 +11,98 @@
   get_url: >
     url='{{openresty_mirror}}/{{openresty_tgz}}'
     dest='/tmp/{{openresty_tgz}}'
+    owner=root
+    group=root
+    mode=0644
 
-- name: unarchive...
+- name: create build dirs
+  with_items:
+    - '{{openresty_build_dir}}'
+    - '{{luarocks_build_dir}}'
+  file: >-
+    path={{item}}
+    state=directory
+    owner=root
+    group=root
+    mode=0755
+
+- name: download nginx-auth-ldap...
+  git: >-
+    repo=https://github.com/kvspb/nginx-auth-ldap.git
+    dest={{openresty_build_dir}}/nginx-auth-ldap
+    version={{nginx_auth_ldap_ver}}
+    
+- name: unarchive openresty...
   unarchive: >
     copy=no
     src=/tmp/{{openresty_tgz}}
-    dest='/opt'
+    dest={{openresty_build_dir}}
+    creates={{openresty_build_dir}}/{{openresty_name}}
 
-- name: configure...
+- name: configure openresty...
   command: >
     ./configure
     --prefix={{openresty_install_dir}}
     --with-pcre-jit
     --with-ipv6
+    --add-module={{openresty_build_dir}}/nginx-auth-ldap
   args:
-    chdir: '/opt/{{openresty_name}}'
-    creates: '/opt/{{openresty_name}}/Makefile'
+    chdir: '/{{openresty_build_dir}}/{{openresty_name}}'
+    creates: '/{{openresty_build_dir}}/{{openresty_name}}/Makefile'
 
-- name: make...
-  command: make build
+- name: make build install...
+  command: make build install
   args:
-    chdir: '/opt/{{openresty_name}}'
-
-- name: install...
-  command: make install
-  args:
-    chdir: '/opt/{{openresty_name}}'
+    chdir: '/{{openresty_build_dir}}/{{openresty_name}}'
     creates: '{{openresty_install_dir}}/nginx/sbin/nginx'
 
-- name: link luajit as lua...
-  file: >-
-    src={{openresty_install_dir}}/luajit/bin/luajit-2.1.0-beta1
-    dest={{openresty_install_dir}}/luajit/bin/lua
-    state=link
-    
 - name: downloading luarocks...
   get_url: >-
-    url='{{luarocks_tgz_url}}'
+    url={{luarocks_tgz_url}}
     dest=/tmp/{{luarocks_tgz}}
-
-- name: unarchive luarocks...
-  unarchive: copy=no src=/tmp/{{luarocks_tgz}} dest=/opt
-
-- name: configure luarocks...
-  command: >
-    ./configure
-    --prefix={{luajit_dir}}
-    --sysconfdir={{luarocks_dir}}
-    --with-lua={{luajit_dir}}
-    --lua-suffix={{luajit_suffix}}
-    --with-lua-include={{luajit_include_dir}}
-  args:
-    chdir: /opt/{{luarocks_name}}
-
-- name: build luarocks...
-  command: make build
-  args:
-    chdir: /opt/{{luarocks_name}}
-
-- name: install luarocks...
-  command: make install
-  args:
-    chdir: /opt/{{luarocks_name}}
-
-- name: proxify luarocks...
-  when: proxy_env.http_proxy is defined
-  template: >-
-    src=config-5.1.lua.j2
-    dest={{luarocks_dir}}/config-5.1.lua
     owner=root
     group=root
     mode=0644
 
-- name: install some rocks..
-  when: luarocks_install is defined
+- name: unarchive luarocks...
+  unarchive: >
+    copy=no
+    src=/tmp/{{luarocks_tgz}}
+    dest={{luarocks_build_dir}}
+    creates={{luarocks_build_dir}}/{{luarocks_name}}
+
+- name: configure luarocks...
   command: >
-    {{luajit_dir}}/bin/luarocks install {{item}}
-  with_items: luarocks_install
+    ./configure
+    --with-lua={{luajit_dir}}
+    --lua-suffix=jit
+    --with-lua-include={{luajit_include_dir}}
+  args:
+    chdir: /{{luarocks_build_dir}}/{{luarocks_name}}
+    creates: /{{luarocks_build_dir}}/{{luarocks_name}}/config.unix
+
+- name: build and install luarocks...
+  command: make build install
+  args:
+    chdir: /{{luarocks_build_dir}}/{{luarocks_name}}
+    creates: /usr/local/bin/luarocks
+
+- name: install some rocks..
+  with_items: '{{luarocks_install | default([])}}'
+  command: >
+    /usr/local/bin/luarocks install {{item}}
+  args:
+    creates: /usr/local/lib/luarocks/rocks/{{item}}
+
+- name: cleanup...
+  when: openresty_cleanup
+  with_items:
+    - '{{openresty_build_dir}}'
+    - '{{luarocks_build_dir}}'
+    - '/tmp/{{openresty_tgz}}'
+    - '/tmp/{{luarocks_tgz}}'
+  file: >-
+    path={{item}}
+    state=absent
+
+    
