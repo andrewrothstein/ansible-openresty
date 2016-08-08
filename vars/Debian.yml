@@ -1,0 +1,11 @@
+---
+openresty_pkgs:
+  - wget
+  - libreadline-dev
+  - libncurses5-dev
+  - libpcre3-dev
+  - libssl-dev
+  - libldap2-dev
+  - perl
+  - make
+  - build-essential
