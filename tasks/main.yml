@@ -8,7 +8,7 @@
 
 - name: install pkg deps
   become: yes
-  becom_user: root
+  become_user: root
   with_items: '{{openresty_pkgs}}'
   package: name={{item}} state=present
   
