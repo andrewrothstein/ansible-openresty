@@ -17,6 +17,8 @@ luarocks_ver : '2.3.0'
 luarocks_mirror : 'http://luarocks.org/releases'
 luarocks_build_dir : '/opt/luarocks'
 
+luarocks_timeout_seconds : 600
+
 # if you want to control the set of luarocks to install
 luarocks_install :
   - luasec
