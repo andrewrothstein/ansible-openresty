@@ -21,5 +21,8 @@ galaxy_info:
   galaxy_tags:
     - development
 
-dependencies: []
-  
+dependencies:
+  - role: andrewrothstein.unarchive-deps
+    version: v1.0.5
+  - role: andrewrothstein.git
+    version: v3.0.0
