@@ -10,16 +10,18 @@
   become: yes
   become_user: root
   with_items: '{{openresty_pkgs}}'
-  package: name={{item}} state=present
+  package:
+    name: '{{item}}'
+    state: present
   
 - name: download tgz...
   become: yes
   become_user: root
-  get_url: >
-    url={{openresty_mirror}}/{{openresty_tgz}}
-    dest=/tmp/{{openresty_tgz}}
-    mode=0644
-    timeout={{openresty_timeout_seconds}}
+  get_url:
+    url: '{{openresty_mirror}}/{{openresty_tgz}}'
+    dest: /tmp/{{openresty_tgz}}
+    mode: '0644'
+    timeout: '{{openresty_timeout_seconds}}'
 
 - name: create build dirs
   become: yes
@@ -27,10 +29,10 @@
   with_items:
     - '{{openresty_build_dir}}'
     - '{{luarocks_build_dir}}'
-  file: >-
-    path={{item}}
-    state=directory
-    mode=0755
+  file:
+    path: '{{item}}'
+    state: directory
+    mode: '0755'
 
 - name: download nginx-auth-ldap...
   become: yes
@@ -43,55 +45,55 @@
 - name: unarchive openresty...
   become: yes
   become_user: root
-  unarchive: >
-    copy=no
-    src=/tmp/{{openresty_tgz}}
-    dest={{openresty_build_dir}}
-    creates={{openresty_build_dir}}/{{openresty_name}}
+  unarchive:
+    copy: no
+    src: /tmp/{{openresty_tgz}}
+    dest: '{{openresty_build_dir}}'
+    creates: '{{openresty_build_dir}}/{{openresty_name}}'
 
 - name: configure openresty...
   become: yes
   become_user: root
-  command: >
+  command: >-
     ./configure
     --prefix={{openresty_install_dir}}
     --with-pcre-jit
     --with-ipv6
     --add-module={{openresty_build_dir}}/nginx-auth-ldap
   args:
-    chdir: '/{{openresty_build_dir}}/{{openresty_name}}'
-    creates: '/{{openresty_build_dir}}/{{openresty_name}}/Makefile'
+    chdir: /{{openresty_build_dir}}/{{openresty_name}}
+    creates: /{{openresty_build_dir}}/{{openresty_name}}/Makefile
 
 - name: make build install...
   become: yes
   become_user: root
   command: make build install
   args:
-    chdir: '/{{openresty_build_dir}}/{{openresty_name}}'
+    chdir: /{{openresty_build_dir}}/{{openresty_name}}
     creates: '{{openresty_install_dir}}/nginx/sbin/nginx'
 
 - name: downloading luarocks...
   become: yes
   become_user: root
-  get_url: >-
-    url={{luarocks_tgz_url}}
-    dest=/tmp/{{luarocks_tgz}}
-    mode=0644
-    timeout={{openresty_timeout_seconds}}
+  get_url:
+    url: '{{luarocks_tgz_url}}'
+    dest: /tmp/{{luarocks_tgz}}
+    mode: '0644'
+    timeout: '{{openresty_timeout_seconds}}'
 
 - name: unarchive luarocks...
   become: yes
   become_user: root
-  unarchive: >
-    copy=no
-    src=/tmp/{{luarocks_tgz}}
-    dest={{luarocks_build_dir}}
-    creates={{luarocks_build_dir}}/{{luarocks_name}}
+  unarchive:
+    copy: no
+    src: /tmp/{{luarocks_tgz}}
+    dest: '{{luarocks_build_dir}}'
+    creates: '{{luarocks_build_dir}}/{{luarocks_name}}'
 
 - name: configure luarocks...
   become: yes
   become_user: root
-  command: >
+  command: >-
     ./configure
     --with-lua={{luajit_dir}}
     --lua-suffix=jit
@@ -112,7 +114,7 @@
   become: yes
   become_user: root
   with_items: '{{luarocks_install | default([])}}'
-  command: >
+  command: >-
     /usr/local/bin/luarocks install --timeout={luarocks_timeout_seconds}} {{item}}
   args:
     creates: /usr/local/lib/luarocks/rocks/{{item}}
@@ -126,8 +128,8 @@
     - '{{luarocks_build_dir}}'
     - '/tmp/{{openresty_tgz}}'
     - '/tmp/{{luarocks_tgz}}'
-  file: >-
-    path={{item}}
-    state=absent
+  file:
+    path: '{{item}}'
+    state: absent
 
     
