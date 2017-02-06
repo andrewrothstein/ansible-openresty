@@ -1,22 +1,22 @@
 ---
 # defaults file for openresty
-openresty_ver : '1.9.7.4'
-openresty_mirror : 'https://openresty.org/download'
-openresty_build_dir : '/opt/openresty'
-openresty_install_dir : '/usr/local/openresty'
+openresty_ver : '1.11.2.2'
+openresty_checksum: sha256:7f9ca62cfa1e4aedf29df9169aed0395fd1b90de254139996e554367db4d5a01
+openresty_mirror : https://openresty.org/download
+openresty_build_dir : /opt/openresty
+openresty_install_dir : /usr/local/openresty
 
 openresty_timeout_seconds : 600
-
 openresty_cleanup : False
 
 nginx_auth_ldap_ver : master
 
 luajit_ver : '2.1'
 
-luarocks_ver : '2.3.0'
-luarocks_mirror : 'http://luarocks.org/releases'
-luarocks_build_dir : '/opt/luarocks'
-
+luarocks_ver : '2.4.2'
+luarocks_mirror : http://luarocks.org/releases
+luarocks_build_dir : /opt/luarocks
+luarocks_checksum: sha256:0e1ec34583e1b265e0fbafb64c8bd348705ad403fe85967fd05d3a659f74d2e5
 luarocks_timeout_seconds : 600
 
 # if you want to control the set of luarocks to install

@@ -21,6 +21,7 @@
     url: '{{openresty_mirror}}/{{openresty_tgz}}'
     dest: /tmp/{{openresty_tgz}}
     mode: '0644'
+    checksum: '{{openresty_checksum}}'
     timeout: '{{openresty_timeout_seconds}}'
 
 - name: create build dirs
@@ -79,6 +80,7 @@
     url: '{{luarocks_tgz_url}}'
     dest: /tmp/{{luarocks_tgz}}
     mode: '0644'
+    checksum: '{{luarocks_checksum}}'
     timeout: '{{openresty_timeout_seconds}}'
 
 - name: unarchive luarocks...
