@@ -1,5 +1,5 @@
 ---
 - hosts: all
   roles:
-    - role : '.'
-#      openresty_cleanup : True
+    - role : '{{playbook_dir}}'
+      openresty_cleanup : True
