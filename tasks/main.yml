@@ -101,15 +101,15 @@
     --lua-suffix=jit
     --with-lua-include={{luajit_include_dir}}
   args:
-    chdir: /{{luarocks_build_dir}}/{{luarocks_name}}
-    creates: /{{luarocks_build_dir}}/{{luarocks_name}}/config.unix
+    chdir: '{{luarocks_build_dir}}/{{luarocks_name}}'
+    creates: '{{luarocks_build_dir}}/{{luarocks_name}}/config.unix'
 
 - name: build and install luarocks...
   become: yes
   become_user: root
   command: make build install
   args:
-    chdir: /{{luarocks_build_dir}}/{{luarocks_name}}
+    chdir: '{{luarocks_build_dir}}/{{luarocks_name}}'
     creates: /usr/local/bin/luarocks
 
 - name: install some rocks..
