@@ -24,5 +24,3 @@ galaxy_info:
 dependencies:
   - role: andrewrothstein.unarchive-deps
     version: v1.0.5
-  - role: andrewrothstein.git
-    version: v3.0.0

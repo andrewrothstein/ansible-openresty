@@ -2,6 +2,10 @@
 - hosts: all
   roles:
     - role : '{{playbook_dir}}'
+      luarocks_install :
+        - luasec
+        - luajson
+        - lua-resty-http
       openresty_cleanup : True
       git_config_protocol_map :
         - uid: f8d09910-ecdf-11e6-90f4-b77811dd8e90
