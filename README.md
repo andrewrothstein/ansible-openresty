@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-openresty.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-openresty)
 andrewrothstein.openresty
 ===========================
 

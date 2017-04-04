@@ -38,10 +38,10 @@
 - name: download nginx-auth-ldap...
   become: yes
   become_user: root
-  git: >-
-    repo=https://github.com/kvspb/nginx-auth-ldap.git
-    dest={{openresty_build_dir}}/nginx-auth-ldap
-    version={{nginx_auth_ldap_ver}}
+  git:
+    repo: https://github.com/kvspb/nginx-auth-ldap.git
+    dest: '{{openresty_build_dir}}/nginx-auth-ldap'
+    version: {{nginx_auth_ldap_ver}}
     
 - name: unarchive openresty...
   become: yes
