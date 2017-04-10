@@ -1,11 +1,6 @@
 ---
 - hosts: all
   roles:
-    - role: andrewrothstein.git
-      git_config_protocol_map :
-        - uid: f8d09910-ecdf-11e6-90f4-b77811dd8e90
-          url: https://
-          insteadOf : git://
     - role : '{{playbook_dir}}'
       luarocks_install :
         - luasec
