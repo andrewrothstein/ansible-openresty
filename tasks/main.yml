@@ -62,15 +62,15 @@
     --with-ipv6
     --add-module={{openresty_build_dir}}/nginx-auth-ldap
   args:
-    chdir: /{{openresty_build_dir}}/{{openresty_name}}
-    creates: /{{openresty_build_dir}}/{{openresty_name}}/Makefile
+    chdir: '{{openresty_build_dir}}/{{openresty_name}}'
+    creates: '{{openresty_build_dir}}/{{openresty_name}}/Makefile'
 
 - name: make build install...
   become: yes
   become_user: root
   command: make build install
   args:
-    chdir: /{{openresty_build_dir}}/{{openresty_name}}
+    chdir: '{{openresty_build_dir}}/{{openresty_name}}'
     creates: '{{openresty_install_dir}}/nginx/sbin/nginx'
 
 - name: downloading luarocks...
@@ -79,7 +79,7 @@
   get_url:
     url: '{{luarocks_tgz_url}}'
     dest: /tmp/{{luarocks_tgz}}
-    mode: '0644'
+    mode: 0644
     checksum: '{{luarocks_checksum}}'
     timeout: '{{openresty_timeout_seconds}}'
 
