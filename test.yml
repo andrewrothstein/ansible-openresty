@@ -1,11 +1,6 @@
 ---
 - hosts: all
   roles:
-    - role: andrewrothstein.pkg-upgrade
     - role : '{{playbook_dir}}'
-      luarocks_install :
-        - luasec
-        - luajson
-        - lua-resty-http
       openresty_cleanup : True
 

@@ -20,7 +20,7 @@ luarocks_checksum: sha256:0e1ec34583e1b265e0fbafb64c8bd348705ad403fe85967fd05d3a
 luarocks_timeout_seconds : 600
 
 # if you want to control the set of luarocks to install
-#luarocks_install :
-#  - luasec
-#  - luajson
-#  - lua-resty-http
+luarocks_install :
+  - luasec
+  - luajson
+  - lua-resty-http
