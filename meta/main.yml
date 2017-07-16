@@ -25,11 +25,11 @@ galaxy_info:
 
 dependencies:
   - role: andrewrothstein.unarchive-deps
-    version: v1.0.6
+    version: v1.0.9
   - role: andrewrothstein.gcc-toolbox
-    version: v1.0.1
+    version: v1.0.5
   - role: andrewrothstein.git
-    version: v3.0.0
+    version: v3.0.1
     git_config_protocol_map :
       - uid: f8d09910-ecdf-11e6-90f4-b77811dd8e90
         url: https://
