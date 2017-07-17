@@ -47,7 +47,7 @@
   become: yes
   become_user: root
   unarchive:
-    remote_src: no
+    remote_src: yes
     src: /tmp/{{openresty_tgz}}
     dest: '{{openresty_build_dir}}'
     creates: '{{openresty_build_dir}}/{{openresty_name}}'
@@ -87,7 +87,7 @@
   become: yes
   become_user: root
   unarchive:
-    remote_src: no
+    remote_src: yes
     src: /tmp/{{luarocks_tgz}}
     dest: '{{luarocks_build_dir}}'
     creates: '{{luarocks_build_dir}}/{{luarocks_name}}'
