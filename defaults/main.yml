@@ -1,7 +1,7 @@
 ---
 # defaults file for openresty
-openresty_ver : '1.11.2.2'
-openresty_checksum: sha256:7f9ca62cfa1e4aedf29df9169aed0395fd1b90de254139996e554367db4d5a01
+openresty_ver : '1.11.2.4'
+openresty_checksum: sha256:07679171450a6c083f983f6130056de3c4e13cc2d117dea68e1c6990e2e49ac9
 openresty_mirror : https://openresty.org/download
 openresty_build_dir : /usr/local/src/openresty
 openresty_install_dir : /usr/local/openresty

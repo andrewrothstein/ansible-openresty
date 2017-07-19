@@ -1,8 +1,8 @@
-[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-openresty.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-openresty)
 andrewrothstein.openresty
-===========================
+=========================
+[![Build Status](https://travis-ci.org/andrewrothstein/ansible-openresty.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-openresty)
 
-A role for installing [openresty](https://openresty.org)
+Installs [openresty](https://openresty.org)
 
 Requirements
 ------------
