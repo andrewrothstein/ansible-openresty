@@ -15,6 +15,7 @@ galaxy_info:
         - 23
         - 24
         - 25
+        - 26
     - name: Ubuntu
       versions:
         - trusty
@@ -22,9 +23,7 @@ galaxy_info:
     - name: Debian
       versions:
         - jessie
-    - name: Alpine
-      versions:
-        - all
+        - stretch
 
   galaxy_tags:
     - development
