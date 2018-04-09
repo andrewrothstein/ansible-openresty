@@ -3,6 +3,7 @@
 openresty_name : 'openresty-{{openresty_ver}}'
 openresty_tgz : '{{openresty_name}}.tar.gz'
 openresty_url : '{{openresty_mirror}}/{{openresty_tgz}}'
+openresty_checksum: '{{openresty_checksums[openresty_ver]}}'
 
 luajit_dir : '{{openresty_install_dir}}/luajit'
 luajit_include_dir : '{{luajit_dir}}/include/luajit-{{luajit_ver}}'
