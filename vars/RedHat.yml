@@ -6,5 +6,6 @@ openresty_pkgs:
   - pcre-devel
   - openssl-devel
   - openldap-devel
+  - zlib-devel
   - gcc
   - make

@@ -11,5 +11,5 @@ luajit_include_dir : '{{luajit_dir}}/include/luajit-{{luajit_ver}}'
 luarocks_name : 'luarocks-{{luarocks_ver}}'
 luarocks_tgz : '{{luarocks_name}}.tar.gz'
 luarocks_tgz_url : '{{luarocks_mirror}}/{{luarocks_tgz}}'
-
+luarocks_checksum: '{{luarocks_checksums[luarocks_ver]}}'
 

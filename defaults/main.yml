@@ -14,10 +14,12 @@ nginx_auth_ldap_ver : master
 
 luajit_ver : '2.1'
 
-luarocks_ver : '2.4.2'
+luarocks_ver : '2.4.4'
 luarocks_mirror : http://luarocks.github.io/luarocks/releases
 luarocks_build_dir : /usr/local/src/luarocks
-luarocks_checksum: sha256:0e1ec34583e1b265e0fbafb64c8bd348705ad403fe85967fd05d3a659f74d2e5
+luarocks_checksums:
+  '2.4.2': sha256:0e1ec34583e1b265e0fbafb64c8bd348705ad403fe85967fd05d3a659f74d2e5
+  '2.4.4': sha256:3938df33de33752ff2c526e604410af3dceb4b7ff06a770bc4a240de80a1f934
 luarocks_timeout_seconds : 600
 
 # if you want to control the set of luarocks to install

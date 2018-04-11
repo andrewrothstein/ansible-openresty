@@ -6,6 +6,7 @@ openresty_pkgs:
   - libpcre3-dev
   - libssl-dev
   - libldap2-dev
+  - zlib1g-dev
   - perl
   - make
   - build-essential

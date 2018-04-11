@@ -1,2 +1,4 @@
 **~
 *.retry
+requirements.yml
+Dockerfile.*
