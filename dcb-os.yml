@@ -1,0 +1,10 @@
+- centos_7
+- debian_jessie
+- debian_stretch
+- fedora_23
+- fedora_24
+- fedora_25
+- fedora_26
+- fedora_27
+- ubuntu_trusty
+- ubuntu_xenial
