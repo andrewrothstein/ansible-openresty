@@ -1,41 +1,34 @@
----
+dependencies:
+- role: andrewrothstein.unarchive-deps
+  version: v1.0.12
+- role: andrewrothstein.gcc-toolbox
+  version: v1.0.7
+- role: andrewrothstein.git
+  version: v3.0.1
 galaxy_info:
   author: Andrew Rothstein
-  description: openresty role
   company: BlackRock
+  description: openresty role
+  galaxy_tags:
+  - development
   license:
-    - MIT
+  - MIT
   min_ansible_version: 2.0
   platforms:
-    - name: EL
-      versions:
-        - 7
-    - name: Fedora
-      versions:
-        - 23
-        - 24
-        - 25
-        - 26
-    - name: Ubuntu
-      versions:
-        - trusty
-        - xenial
-    - name: Debian
-      versions:
-        - jessie
-        - stretch
-
-  galaxy_tags:
-    - development
-
-dependencies:
-  - role: andrewrothstein.unarchive-deps
-    version: v1.0.10
-  - role: andrewrothstein.gcc-toolbox
-    version: v1.0.7
-  - role: andrewrothstein.git
-    version: v3.0.1
-    git_config_protocol_map :
-      - uid: f8d09910-ecdf-11e6-90f4-b77811dd8e90
-        url: https://
-        insteadOf : git://
+  - name: EL
+    versions:
+    - 7
+  - name: Fedora
+    versions:
+    - 23
+    - 24
+    - 25
+    - 26
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial
+  - name: Debian
+    versions:
+    - jessie
+    - stretch
