@@ -1,6 +1,6 @@
 dependencies:
 - role: andrewrothstein.unarchive-deps
-  version: v1.0.12
+  version: v1.1.0
 - role: andrewrothstein.gcc-toolbox
   version: v1.0.11
 - role: andrewrothstein.git
