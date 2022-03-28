@@ -1,4 +1,4 @@
-**~
-*.retry
-requirements.yml
+**~*.retry
 Dockerfile.*
+requirements.yml
+!meta/requirements.yml

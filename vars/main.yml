@@ -1,15 +1,11 @@
 ---
 # vars file for openresty
-openresty_name : 'openresty-{{openresty_ver}}'
-openresty_tgz : '{{openresty_name}}.tar.gz'
-openresty_url : '{{openresty_mirror}}/{{openresty_tgz}}'
-openresty_checksum: '{{openresty_checksums[openresty_ver]}}'
+openresty_name: openresty-{{ openresty_ver }}
+openresty_tgz: '{{ openresty_name }}.tar.gz'
+openresty_tmp_tgz: /tmp/{{ openresty_tgz }}
+openresty_url: '{{ openresty_mirror }}/{{ openresty_tgz }}'
+openresty_checksum: '{{ openresty_checksums[openresty_ver] }}'
+openresty_build_subdir: '{{ openresty_build_dir }}/{{ openresty_name }}'
 
-luajit_dir : '{{openresty_install_dir}}/luajit'
-luajit_include_dir : '{{luajit_dir}}/include/luajit-{{luajit_ver}}'
-
-luarocks_name : 'luarocks-{{luarocks_ver}}'
-luarocks_tgz : '{{luarocks_name}}.tar.gz'
-luarocks_tgz_url : '{{luarocks_mirror}}/{{luarocks_tgz}}'
-luarocks_checksum: '{{luarocks_checksums[luarocks_ver]}}'
-
+luajit_dir: '{{ openresty_install_dir }}/luajit'
+luajit_include_dir: '{{ luajit_dir }}/include/luajit-{{ luajit_ver }}'
