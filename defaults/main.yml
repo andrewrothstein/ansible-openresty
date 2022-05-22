@@ -9,7 +9,7 @@ openresty_timeout_seconds: 600
 nginx_auth_ldap_ver: master
 
 # if you want to control the set of luarocks to install
-luarocks_install :
+luarocks_install:
   - luasec
   - luajson
   - lua-resty-http

@@ -1,6 +1,4 @@
 ---
 - hosts: all
   roles:
-    - role : '{{playbook_dir}}'
-      openresty_cleanup : True
-
+  - role: '{{ playbook_dir }}'
