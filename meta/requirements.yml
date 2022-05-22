@@ -6,6 +6,6 @@
 - name: andrewrothstein.git
   version: v3.1.6
 - name: andrewrothstein.luarocks
-  version: v1.1.4
+  version: v1.1.5
 - name: andrewrothstein.openssl
   version: v1.0.8
