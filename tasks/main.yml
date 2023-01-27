@@ -9,7 +9,7 @@
     openssl_include_dev_pkgs: true
 - include_role:
     name: andrewrothstein.git
-- icnlude_role:
+- include_role:
     name: andrewrothstein.luarocks
 
 - name: resolve platform specific vars
