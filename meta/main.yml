@@ -1,11 +1,4 @@
 ---
-dependencies:
-- andrewrothstein.unarchive-deps
-- andrewrothstein.gcc-toolbox
-- role: andrewrothstein.openssl
-  openssl_include_dev_pkgs: true
-- andrewrothstein.git
-- andrewrothstein.luarocks
 galaxy_info:
   author: Andrew Rothstein
   company: BlackRock
