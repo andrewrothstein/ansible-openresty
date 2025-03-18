@@ -1,19 +1,24 @@
 ---
-- include_role:
-    name: andrewrothstein.unarchive-deps
-- include_role:
-    name: andrewrothstein.gcc-toolbox
-- include_role:
+- name: Installing andrewrothstein.unarchivedeps
+  ansible.builtin.include_role:
+    name: andrewrothstein.unarchivedeps
+- name: Installing andrewrothstein.gcc_toolbox
+  ansible.builtin.include_role:
+    name: andrewrothstein.gcc_toolbox
+- name: Installingi andrewrothstein.openssl
+  ansible.builtin.include_role:
     name: andrewrothstein.openssl
   vars:
     openssl_include_dev_pkgs: true
-- include_role:
+- name: Installing andrewrothstein.git
+  ansible.builtin.include_role:
     name: andrewrothstein.git
-- include_role:
+- name: Installing andrewrothstein.luarocks (and luajit)
+  ansible.builtin.include_role:
     name: andrewrothstein.luarocks
 
-- name: resolve platform specific vars
-  include_vars: '{{ item }}'
+- name: Resolve platform specific vars
+  ansible.builtin.include_vars: '{{ item }}'
   with_first_found:
     - files:
         - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
@@ -23,52 +28,52 @@
       paths:
         - '{{ role_path }}/vars'
 
-- name: install os pkg deps
+- name: Installing OS pkg deps
   become: true
   become_user: root
-  package:
+  ansible.builtin.package:
     name: '{{ openresty_pkgs }}'
     state: present
 
-- name: downloading {{ openresty_url }}
+- name: Downloading {{ openresty_url }}
   become: true
   become_user: root
-  get_url:
+  ansible.builtin.get_url:
     url: '{{ openresty_url }}'
     dest: '{{ openresty_tmp_tgz }}'
-    mode: 0644
+    mode: '644'
     checksum: '{{ openresty_checksum }}'
     timeout: '{{ openresty_timeout_seconds }}'
 
-- name: mkdir {{ openresty_build_dir }}
+- name: Mkdir {{ openresty_build_dir }}
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     path: '{{ openresty_build_dir }}'
     state: directory
-    mode: '0755'
+    mode: '755'
 
-- name: download nginx-auth-ldap...
+- name: Cloning nginx-auth-ldap with git
   become: true
   become_user: root
-  git:
+  ansible.builtin.git:
     repo: https://github.com/kvspb/nginx-auth-ldap.git
     dest: '{{ openresty_build_dir }}/nginx-auth-ldap'
     version: '{{ nginx_auth_ldap_ver }}'
 
-- name: unarchive openresty...
+- name: Unarchive openresty...
   become: true
   become_user: root
-  unarchive:
+  ansible.builtin.unarchive:
     remote_src: true
     src: '{{ openresty_tmp_tgz }}'
     dest: '{{ openresty_build_dir }}'
     creates: '{{ openresty_build_subdir }}'
 
-- name: configure openresty...
+- name: Configure openresty...
   become: true
   become_user: root
-  command: >-
+  ansible.builtin.command: >-
     ./configure
     --prefix={{ openresty_install_dir }}
     --with-pcre-jit
@@ -78,20 +83,20 @@
     chdir: '{{ openresty_build_subdir }}'
     creates: '{{ openresty_build_dir }}/{{ openresty_name }}/Makefile'
 
-- name: make build install...
+- name: Make, Build, Install
   become: true
   become_user: root
-  command: make build install
+  ansible.builtin.command: make build install
   args:
     chdir: '{{ openresty_build_subdir }}'
     creates: '{{ openresty_install_dir }}/nginx/sbin/nginx'
 
-- name: cleanup...
+- name: Cleanup...
   become: true
   become_user: root
   with_items:
     - '{{ openresty_build_dir }}'
     - '/tmp/{{ openresty_tgz }}'
-  file:
+  ansible.builtin.file:
     path: '{{ item }}'
     state: absent

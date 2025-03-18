@@ -4,19 +4,21 @@ galaxy_info:
   company: BlackRock
   description: openresty role
   galaxy_tags:
-  - development
-  license:
-  - MIT
-  min_ansible_version: 2.0
+    - development
+  license: MIT
+  min_ansible_version: '2.0'
+  namespace: andrewrothstein
   platforms:
-  - name: Debian
-    versions:
-    - buster
-    - bullseye
-  - name: EL
-    versions:
-    - 8
-  - name: Ubuntu
-    versions:
-    - focal
-    - bionic
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+    - name: EL
+      versions:
+        - '8'
+        - '9'
+    - name: Ubuntu
+      versions:
+        - jammy
+        - noble
+  role_name: openresty
